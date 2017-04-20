@@ -1,3 +1,4 @@
+//new comment added
 module.exports = {
   log: require('./lib/log'),
   Wit: require('./lib/wit'),
