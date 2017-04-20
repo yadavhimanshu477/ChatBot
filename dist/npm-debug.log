@@ -1,0 +1,89 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'publish' ]
+2 info using npm@3.10.10
+3 info using node@v6.10.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/sendinblue-himanshu/node-wit/dist',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/sendinblue-himanshu/.npm/node-wit/4.2.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/sendinblue-himanshu/.npm correctMkdir not in flight; initializing
+10 info lifecycle node-wit@4.2.0~prepublish: node-wit@4.2.0
+11 silly lifecycle node-wit@4.2.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/sendinblue-himanshu/.npm/node-wit/4.2.0/package.tgz',
+12 verbose tar pack   '/Users/sendinblue-himanshu/node-wit/dist' ]
+13 verbose tarball /Users/sendinblue-himanshu/.npm/node-wit/4.2.0/package.tgz
+14 verbose folder /Users/sendinblue-himanshu/node-wit/dist
+15 verbose addLocalTarball adding from inside cache /Users/sendinblue-himanshu/.npm/node-wit/4.2.0/package.tgz
+16 verbose correctMkdir /Users/sendinblue-himanshu/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd node-wit@4.2.0
+18 verbose afterAdd /Users/sendinblue-himanshu/.npm/node-wit/4.2.0/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/sendinblue-himanshu/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/sendinblue-himanshu/.npm/node-wit/4.2.0/package/package.json written
+21 silly publish { name: 'node-wit',
+21 silly publish   version: '4.2.0',
+21 silly publish   description: 'Wit.ai Node.js SDK',
+21 silly publish   keywords: [ 'wit', 'wit.ai', 'bot', 'botengine', 'bots', 'nlp', 'automation' ],
+21 silly publish   main: 'index.js',
+21 silly publish   scripts: { test: 'mocha ./tests/lib.js' },
+21 silly publish   repository:
+21 silly publish    { type: 'git',
+21 silly publish      url: 'git+https://github.com/wit-ai/node-wit.git' },
+21 silly publish   author: { name: 'The Wit Team', email: 'help@wit.ai' },
+21 silly publish   dependencies: { 'isomorphic-fetch': '^2.2.1', uuid: '^3.0.0' },
+21 silly publish   engines: { node: '>=4.0.0' },
+21 silly publish   devDependencies:
+21 silly publish    { 'babel-cli': '^6.16.0',
+21 silly publish      'babel-preset-es2015': '^6.16.0',
+21 silly publish      'babel-preset-stage-0': '^6.16.0',
+21 silly publish      chai: '^3.5.0',
+21 silly publish      mocha: '^3.1.2',
+21 silly publish      sinon: '^1.17.6' },
+21 silly publish   bugs: { url: 'https://github.com/wit-ai/node-wit/issues' },
+21 silly publish   readme: 'ERROR: No README data found!',
+21 silly publish   homepage: 'https://github.com/wit-ai/node-wit#readme',
+21 silly publish   _id: 'node-wit@4.2.0',
+21 silly publish   _shasum: '33e27b8ffe30520833a9155a89a297abb3ae53fd',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name node-wit
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'node-wit',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'node-wit',
+26 silly mapToRegistry   name: 'node-wit',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/node-wit
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/sendinblue-himanshu/.npm/node-wit/4.2.0/package.tgz
+30 verbose stack Error: auth required for publishing
+30 verbose stack     at CachingRegistryClient.publish (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/publish.js:30:14)
+30 verbose stack     at /usr/local/lib/node_modules/npm/lib/publish.js:138:14
+30 verbose stack     at mapToRegistry (/usr/local/lib/node_modules/npm/lib/utils/map-to-registry.js:62:3)
+30 verbose stack     at publish_ (/usr/local/lib/node_modules/npm/lib/publish.js:107:3)
+30 verbose stack     at Array.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+30 verbose stack     at LOOP (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+30 verbose stack     at LOOP (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:14:28)
+30 verbose stack     at chain (/usr/local/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+30 verbose stack     at /usr/local/lib/node_modules/npm/lib/publish.js:73:5
+30 verbose stack     at RES (/usr/local/lib/node_modules/npm/node_modules/inflight/inflight.js:23:14)
+31 verbose cwd /Users/sendinblue-himanshu/node-wit/dist
+32 error Darwin 16.5.0
+33 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "publish"
+34 error node v6.10.0
+35 error npm  v3.10.10
+36 error code ENEEDAUTH
+37 error need auth auth required for publishing
+38 error need auth You need to authorize this machine using `npm adduser`
+39 verbose exit [ 1, true ]
