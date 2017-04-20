@@ -1,6 +1,6 @@
 'use strict';
 
-console.log("first look");
+console.log("first looks");
 
 // Messenger API integration example
 // We assume you have:
