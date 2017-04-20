@@ -1,5 +1,5 @@
-//comment added
 
+//new comment added by himanshu
 module.exports = {
   log: require('./lib/log'),
   Wit: require('./lib/wit'),
