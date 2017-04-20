@@ -1,6 +1,6 @@
-# Wit Node.js SDK [![npm](https://img.shields.io/npm/v/node-wit.svg)](https://www.npmjs.com/package/node-wit)
+# Chatbot Shezartech SDK [![npm](https://img.shields.io/npm/v/node-wit.svg)](https://www.npmjs.com/package/node-wit)
 
-`node-wit` is the Node.js SDK for [Wit.ai](https://wit.ai).
+`Chatbot` is the Node.js SDK for [Wit.ai](https://wit.ai).
 
 ## Install
 
