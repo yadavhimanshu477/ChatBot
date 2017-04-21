@@ -149,6 +149,11 @@ app.use(({method, url}, rsp, next) => {
 });
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
+
+app.get('/', (req, res) => {
+  res.send("https server started successfully....")
+});
+
 // Webhook setup
 app.get('/webhook', (req, res) => {
   if (req.query['hub.mode'] === 'subscribe' &&
