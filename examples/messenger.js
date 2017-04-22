@@ -202,7 +202,7 @@ app.get('/webhook', (req, res) => {
              { oaid: oaid,
                timestamp: timestamp,
                mac: result,
-               data: '{"uid":3068877753033542888,"message":'+text+'}' },
+               data: '{"uid":3068877753033542888,"message":"'+text+'"}' },
             headers: 
              {
                'cache-control': 'no-cache' } 
