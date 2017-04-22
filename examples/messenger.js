@@ -20,6 +20,8 @@ const crypto = require('crypto');
 const express = require('express');
 const fetch = require('node-fetch');
 const request = require('request');
+const sha256 = require('sha256');
+const execPhp = require('exec-php');
 
 let Wit = null;
 let log = null;
@@ -161,15 +163,32 @@ app.get('/webhook', (req, res) => {
 
   console.log(req.query.fromuid)
   console.log("fromuid ::: "+req.query.fromuid)
-  const sender = 3068877753033542888;
+  const sender = req.query.fromuid;
   const sessionId = findOrCreateSession(sender);
+  const oaid = '1032900368143269705';
   const text = req.query.message;
+  const secretkey = 'IEklE4N1I7bWqp5TOQ2F'
+  const timestamp = new Date().getTime()
+  //var data = {uid:sender,message:"hello"}
+
+  execPhp('himanshu.php', function(error, php, outprint){
+    // outprint is now `One'.
+
+    console.log("outprint is ::: "+outprint)
+    
+    php.my_function(oaid, sender, text, timestamp, secretkey, function(err, result, output, printed){
+
+      console.log("output is :::: "+printed)
+
+    });
+  });
 
   wit.runActions(
     sessionId, // the user's current session
     text, // the user's message
     sessions[sessionId].context // the user's current session state
   ).then((context) => {
+
     // Our bot did everything it has to do.
     // Now it's waiting for further messages to proceed.
     console.log('Waiting for next user messages');
