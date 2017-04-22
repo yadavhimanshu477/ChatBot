@@ -207,6 +207,8 @@ app.get('/webhook', (req, res) => {
              {
                'cache-control': 'no-cache' } };
 
+               console.log(options)
+
           request(options, function (error, response, body) {
             if (error) throw new Error(error);
 
