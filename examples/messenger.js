@@ -311,16 +311,14 @@ function verifyRequestSignature(req, res, buf) {
   }
 }
 
-//app.listen(PORT);
+var fs = require('fs');
+var https = require('https');
+var options = {
+  key: fs.readFileSync('/var/www/botshezar.com/botshezar.com.key'),
+  cert: fs.readFileSync('/var/www/botshezar.com/219c087d9f98a683.crt')
+};
 
-// var fs = require('fs');
-// var https = require('https');
-// var options = {
-//   key: fs.readFileSync('/var/www/botshezar.com/botshezar.com.key'),
-//   cert: fs.readFileSync('/var/www/botshezar.com/219c087d9f98a683.crt')
-// };
-
-// var httpsServer = https.createServer(options, app);
-app.listen(PORT);
+var httpsServer = https.createServer(options, app);
+httpsServer.listen(PORT);
 
 console.log('Listening on :' + PORT + '...');
