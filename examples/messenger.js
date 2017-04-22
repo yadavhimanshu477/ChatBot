@@ -181,6 +181,7 @@ app.get('/webhook', (req, res) => {
     php.my_function(oaid, sender, text, timestamp, secretkey, function(err, result, output, printed){
 
       console.log("output is :::: "+result)
+      console.log(printed)
 
         wit.runActions(
           sessionId, // the user's current session
