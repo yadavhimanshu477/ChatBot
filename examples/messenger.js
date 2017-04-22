@@ -171,7 +171,7 @@ app.get('/webhook', (req, res) => {
   const timestamp = new Date().getTime()
   //var data = {uid:sender,message:"hello"}
 
-  execPhp('messenger.php', function(error, php, outprint){
+  execPhp('/var/www/botshezar.com/public_html/app/messenger.php', function(error, php, outprint){
     // outprint is now `One'.
 
     console.log("outprint is ::: "+outprint)
