@@ -12,7 +12,7 @@
 
     	$passcode = (int)$oaid.$data.$timestamp.$secretkey;
 
-    	//echo $passcode;
+    	echo $passcode;
         
         $result = hash('sha256', $passcode);
         return $result;

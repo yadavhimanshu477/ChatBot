@@ -182,9 +182,6 @@ app.get('/webhook', (req, res) => {
 
       console.log("output is :::: "+result)
 
-  //   });
-  // });
-
         wit.runActions(
           sessionId, // the user's current session
           text, // the user's message
@@ -205,9 +202,10 @@ app.get('/webhook', (req, res) => {
                data: '{"uid":3068877753033542888,"message":'+text+'}' },
             headers: 
              {
-               'cache-control': 'no-cache' } };
+               'cache-control': 'no-cache' } 
+          };
 
-               console.log(options)
+          console.log(options)
 
           request(options, function (error, response, body) {
             if (error) throw new Error(error);
