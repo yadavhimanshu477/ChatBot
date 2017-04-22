@@ -183,6 +183,7 @@ app.get('/webhook', (req, res) => {
       console.log("result is :::: "+result)
       console.log("output is :::: "+output)
       console.log("printed is :::: "+printed)
+      console.log("timestamp is :::: "+timestamp)
 
         wit.runActions(
           sessionId, // the user's current session
