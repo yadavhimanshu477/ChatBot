@@ -182,31 +182,53 @@ app.get('/webhook', (req, res) => {
 
       console.log("output is :::: "+result)
 
-    });
-  });
+  //   });
+  // });
 
-  wit.runActions(
-    sessionId, // the user's current session
-    text, // the user's message
-    sessions[sessionId].context // the user's current session state
-  ).then((context) => {
+        wit.runActions(
+          sessionId, // the user's current session
+          text, // the user's message
+          sessions[sessionId].context // the user's current session state
+        ).then((context) => {
 
-    // Our bot did everything it has to do.
-    // Now it's waiting for further messages to proceed.
-    console.log('Waiting for next user messages');
+          // Our bot did everything it has to do.
+          // Now it's waiting for further messages to proceed.
 
-    // Based on the session state, you might want to reset the session.
-    // This depends heavily on the business logic of your bot.
-    // Example:
-    // if (context['done']) {
-    //   delete sessions[sessionId];
-    // }
+          var request = require("request");
 
-    // Updating the user's current session state
-    sessions[sessionId].context = context;
-  })
-  .catch((err) => {
-    console.error('Oops! Got an error from Wit: ', err.stack || err);
+          var options = { method: 'POST',
+            url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
+            qs: 
+             { oaid: oaid,
+               timestamp: timestamp,
+               mac: result,
+               data: '{"uid":3068877753033542888,"message":'+text+'}' },
+            headers: 
+             {
+               'cache-control': 'no-cache' } };
+
+          request(options, function (error, response, body) {
+            if (error) throw new Error(error);
+
+            console.log(body);
+          });
+
+          console.log('Waiting for next user messages');
+
+          // Based on the session state, you might want to reset the session.
+          // This depends heavily on the business logic of your bot.
+          // Example:
+          // if (context['done']) {
+          //   delete sessions[sessionId];
+          // }
+
+          // Updating the user's current session state
+          sessions[sessionId].context = context;
+        })
+        .catch((err) => {
+          console.error('Oops! Got an error from Wit: ', err.stack || err);
+        });
+      });
   });
 
   if (req.query['hub.mode'] === 'subscribe' &&
