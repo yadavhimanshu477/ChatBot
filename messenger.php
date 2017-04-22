@@ -3,15 +3,18 @@
     echo "One";
     function my_function($oaid, $sender, $text, $timestamp, $secretkey){
 
-    	echo $sender.'/n';
+    	//echo $sender;
 
-    	$data = {uid:(int)$sender,message:$text}
+    	$arr = array('uid'=>(int)$sender,'message'=>$text);
 
-    	$passcode = $oaid+$data+$timestamp+$secretkey;
+    	$data = json_encode($arr);
+    	//echo $data;
 
-    	echo $passcode.'/n';
+    	$passcode = (int)$oaid.$data.$timestamp.$secretkey;
+
+    	//echo $passcode;
         
-        echo hash('sha256', $passcode);
-        return "kkk";
+        $result = hash('sha256', $passcode);
+        return $result;
     }
 ?>
