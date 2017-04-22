@@ -1,7 +1,5 @@
 'use strict';
 
-console.log("first looks");
-
 // Messenger API integration example
 // We assume you have:
 // * a Wit.ai bot setup (https://wit.ai/docs/quickstart)
@@ -177,7 +175,7 @@ app.get('/webhook', (req, res) => {
           php.my_function(oaid, sender, text, timestamp, secretkey, function(err, result, output, printed) {
 
            
-              wit.runActions(
+              wit.runActionsZalo(
                 sessionId, // the user's current session
                 text, // the user's message
                 sessions[sessionId].context // the user's current session state
