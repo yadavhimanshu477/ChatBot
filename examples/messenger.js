@@ -159,90 +159,78 @@ app.get('/', (req, res) => {
 // Webhook setup
 app.get('/webhook', (req, res) => {
 
-  if(typeof req.query.fromuid != 'undefined') {
+    if(typeof req.query.fromuid != 'undefined') {
 
-  console.log(req.query);
+        console.log(req.query);
+        const sender = ''+req.query.fromuid;
+        const sessionId = findOrCreateSession(sender);
+        const oaid = '1032900368143269705';
+        const text = req.query.message;
+        const secretkey = 'IEklE4N1I7bWqp5TOQ2F'
+        const timestamp = new Date().getTime()
 
-  console.log(req.query.fromuid)
-  console.log("fromuid ::: "+req.query.fromuid)
-  const sender = ''+req.query.fromuid;
-  const sessionId = findOrCreateSession(sender);
-  const oaid = '1032900368143269705';
-  const text = req.query.message;
-  const secretkey = 'IEklE4N1I7bWqp5TOQ2F'
-  const timestamp = new Date().getTime()
+        execPhp('messenger.php', function(error, php, outprint){  
+          // outprint is now `One'.
 
-  console.log("sender is ::: "+sender)
-  //var data = {uid:sender,message:"hello"}
+          console.log("outprint is ::: "+outprint)
+          
+          php.my_function(oaid, sender, text, timestamp, secretkey, function(err, result, output, printed) {
 
-  execPhp('messenger.php', function(error, php, outprint){
-    // outprint is now `One'.
+           
+              wit.runActions(
+                sessionId, // the user's current session
+                text, // the user's message
+                sessions[sessionId].context // the user's current session state
+              ).then((context) => {
 
-    console.log("outprint is ::: "+outprint)
-    
-    php.my_function(oaid, sender, text, timestamp, secretkey, function(err, result, output, printed){
+                // Our bot did everything it has to do.
+                // Now it's waiting for further messages to proceed.
 
-      console.log("result is :::: "+result)
-      console.log("output is :::: "+output)
-      console.log("printed is :::: "+printed)
-      console.log("timestamp is :::: "+timestamp)
+                var request = require("request");
 
-        wit.runActions(
-          sessionId, // the user's current session
-          text, // the user's message
-          sessions[sessionId].context // the user's current session state
-        ).then((context) => {
+                var options = { method: 'POST',
+                  url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
+                  qs: 
+                   { oaid: oaid,
+                     timestamp: timestamp,
+                     mac: result,
+                     data: '{"uid":3068877753033542888,"message":"'+text+'"}' },
+                  headers: 
+                   {
+                     'cache-control': 'no-cache' } 
+                };
 
-          // Our bot did everything it has to do.
-          // Now it's waiting for further messages to proceed.
+                request(options, function (error, response, body) {
+                  if (error) throw new Error(error);
 
-          var request = require("request");
+                  console.log(body);
+                });
 
-          var options = { method: 'POST',
-            url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
-            qs: 
-             { oaid: oaid,
-               timestamp: timestamp,
-               mac: result,
-               data: '{"uid":3068877753033542888,"message":"'+text+'"}' },
-            headers: 
-             {
-               'cache-control': 'no-cache' } 
-          };
+                console.log('Waiting for next user messages');
 
-          console.log(options)
+                // Based on the session state, you might want to reset the session.
+                // This depends heavily on the business logic of your bot.
+                // Example:
+                // if (context['done']) {
+                //   delete sessions[sessionId];
+                // }
 
-          request(options, function (error, response, body) {
-            if (error) throw new Error(error);
-
-            console.log(body);
-          });
-
-          console.log('Waiting for next user messages');
-
-          // Based on the session state, you might want to reset the session.
-          // This depends heavily on the business logic of your bot.
-          // Example:
-          // if (context['done']) {
-          //   delete sessions[sessionId];
-          // }
-
-          // Updating the user's current session state
-          sessions[sessionId].context = context;
-        })
-        .catch((err) => {
-          console.error('Oops! Got an error from Wit: ', err.stack || err);
+                // Updating the user's current session state
+                //sessions[sessionId].context = context;
+              })
+              .catch((err) => {
+                console.error('Oops! Got an error from Wit: ', err.stack || err);
+              });
+            });
         });
-      });
-  });
-}
+    }
 
-  if (req.query['hub.mode'] === 'subscribe' &&
-    req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
-    res.send(req.query['hub.challenge']);
-  } else {
-    res.sendStatus(400);
-  }
+    if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
+      res.send(req.query['hub.challenge']);
+    } else {
+      res.sendStatus(400);
+    }
 
 });
 
