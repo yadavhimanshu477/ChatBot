@@ -163,22 +163,24 @@ app.get('/webhook', (req, res) => {
 
   console.log(req.query.fromuid)
   console.log("fromuid ::: "+req.query.fromuid)
-  const sender = req.query.fromuid;
+  const sender = ''+req.query.fromuid;
   const sessionId = findOrCreateSession(sender);
   const oaid = '1032900368143269705';
   const text = req.query.message;
   const secretkey = 'IEklE4N1I7bWqp5TOQ2F'
   const timestamp = new Date().getTime()
+
+  console.log("sender is ::: "+sender)
   //var data = {uid:sender,message:"hello"}
 
-  execPhp('/var/www/botshezar.com/public_html/app/messenger.php', function(error, php, outprint){
+  execPhp('messenger.php', function(error, php, outprint){
     // outprint is now `One'.
 
     console.log("outprint is ::: "+outprint)
     
     php.my_function(oaid, sender, text, timestamp, secretkey, function(err, result, output, printed){
 
-      console.log("output is :::: "+printed)
+      console.log("output is :::: "+result)
 
     });
   });
@@ -311,14 +313,14 @@ function verifyRequestSignature(req, res, buf) {
 
 //app.listen(PORT);
 
-var fs = require('fs');
-var https = require('https');
-var options = {
-  key: fs.readFileSync('/var/www/botshezar.com/botshezar.com.key'),
-  cert: fs.readFileSync('/var/www/botshezar.com/219c087d9f98a683.crt')
-};
+// var fs = require('fs');
+// var https = require('https');
+// var options = {
+//   key: fs.readFileSync('/var/www/botshezar.com/botshezar.com.key'),
+//   cert: fs.readFileSync('/var/www/botshezar.com/219c087d9f98a683.crt')
+// };
 
-var httpsServer = https.createServer(options, app);
-httpsServer.listen(PORT);
+// var httpsServer = https.createServer(options, app);
+app.listen(PORT);
 
 console.log('Listening on :' + PORT + '...');
