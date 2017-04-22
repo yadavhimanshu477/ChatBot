@@ -159,6 +159,8 @@ app.get('/', (req, res) => {
 // Webhook setup
 app.get('/webhook', (req, res) => {
 
+  if(typeof req.query.fromuid != 'undefined') {
+
   console.log(req.query);
 
   console.log(req.query.fromuid)
@@ -233,6 +235,7 @@ app.get('/webhook', (req, res) => {
         });
       });
   });
+}
 
   if (req.query['hub.mode'] === 'subscribe' &&
     req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
@@ -240,6 +243,7 @@ app.get('/webhook', (req, res) => {
   } else {
     res.sendStatus(400);
   }
+
 });
 
 // Message handler
