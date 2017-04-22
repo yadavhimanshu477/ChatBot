@@ -158,6 +158,9 @@ app.get('/', (req, res) => {
 app.get('/webhook', (req, res) => {
 
   console.log(req.query);
+
+  console.log(req.query.fromuid)
+  console.log("fromuid ::: "+req.query.fromuid)
   const sender = 3068877753033542888;
   const sessionId = findOrCreateSession(sender);
   const text = req.query.message;
