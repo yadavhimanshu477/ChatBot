@@ -183,6 +183,9 @@ app.get('/webhook', (req, res) => {
                     sessions[sessionId].context // the user's current session state
                 ).then((context) => {
 
+                    console.log("cntext :::::::")
+                    console.log(context)
+
                     // Our bot did everything it has to do.
                     // Now it's waiting for further messages to proceed.
 
