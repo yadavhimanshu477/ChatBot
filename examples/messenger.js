@@ -20,6 +20,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 const sha256 = require('sha256');
 const execPhp = require('exec-php');
+const request = require("request");
 
 let Wit = null;
 let log = null;
@@ -168,9 +169,6 @@ app.get('/webhook', (req, res) => {
         const timestamp = new Date().getTime()
 
         execPhp('messenger.php', function(error, php, outprint){  
-          // outprint is now `One'.
-
-          console.log("outprint is ::: "+outprint)
           
           php.my_function(oaid, sender, text, timestamp, secretkey, function(err, result, output, printed) {
 
@@ -183,8 +181,6 @@ app.get('/webhook', (req, res) => {
 
                 // Our bot did everything it has to do.
                 // Now it's waiting for further messages to proceed.
-
-                var request = require("request");
 
                 var options = { method: 'POST',
                   url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
