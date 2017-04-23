@@ -177,7 +177,7 @@ app.get('/webhook', (req, res) => {
           
             //php.my_function(oaid, sender, text, timestamp, secretkey, (err, result, output, printed) => {
 
-                wit.runActions(
+                wit.runActionsZalo(
                     sessionId, // the user's current session
                     text, // the user's message
                     sessions[sessionId].context // the user's current session state
