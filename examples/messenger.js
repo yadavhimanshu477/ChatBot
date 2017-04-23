@@ -173,9 +173,9 @@ app.get('/webhook', (req, res) => {
         const secretkey = 'IEklE4N1I7bWqp5TOQ2F'
         const timestamp = new Date().getTime()
 
-        execPhp('messenger.php', (error, php, outprint) => {  
+        //execPhp('messenger.php', (error, php, outprint) => {  
           
-            php.my_function(oaid, sender, text, timestamp, secretkey, (err, result, output, printed) => {
+            //php.my_function(oaid, sender, text, timestamp, secretkey, (err, result, output, printed) => {
 
                 wit.runActionsZalo(
                     sessionId, // the user's current session
@@ -186,44 +186,53 @@ app.get('/webhook', (req, res) => {
                     console.log("cntext :::::::")
                     console.log(context)
 
+                    console.log("context.msg :::: "+context.msg)
+                    console.log(context.msg)
+
                     // Our bot did everything it has to do.
                     // Now it's waiting for further messages to proceed.
 
-                    var options = { method: 'POST',
-                        url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
-                        qs: { 
-                            oaid: oaid,
-                            timestamp: timestamp,
-                            mac: result,
-                            data: '{"uid":3068877753033542888,"message":"'+text+'"}' 
-                        },
-                        headers: {
-                            'cache-control': 'no-cache' 
-                        } 
-                    };
+                    execPhp('messenger.php', (error, php, outprint) => { 
 
-                    request(options, (error, response, body) => {
-                        if (error) throw new Error(error);
-                        console.log(body);
+                        php.my_function(oaid, sender, text, timestamp, secretkey, (err, result, output, printed) => {
+
+                            var options = { method: 'POST',
+                                url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
+                                qs: { 
+                                    oaid: oaid,
+                                    timestamp: timestamp,
+                                    mac: result,
+                                    data: '{"uid":3068877753033542888,"message":"'+text+'"}' 
+                                },
+                                headers: {
+                                    'cache-control': 'no-cache' 
+                                } 
+                            };
+
+                            request(options, (error, response, body) => {
+                                if (error) throw new Error(error);
+                                console.log(body);
+                            });
+
+                            console.log('Waiting for next user messages');
+
+                            // Based on the session state, you might want to reset the session.
+                            // This depends heavily on the business logic of your bot.
+                            // Example:
+                            // if (context['done']) {
+                              delete sessions[sessionId];
+                            // }
+
+                            // Updating the user's current session state
+                            //sessions[sessionId].context = context;
+                        });
                     });
-
-                    console.log('Waiting for next user messages');
-
-                    // Based on the session state, you might want to reset the session.
-                    // This depends heavily on the business logic of your bot.
-                    // Example:
-                    // if (context['done']) {
-                      delete sessions[sessionId];
-                    // }
-
-                    // Updating the user's current session state
-                    //sessions[sessionId].context = context;
                 })
                 .catch((err) => {
                     console.error('Oops! Got an error from Wit: ', err.stack || err);
                 });
-            });
-        });
+            //});
+        //});
     }
 
     if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === FB_VERIFY_TOKEN) {
