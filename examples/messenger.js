@@ -20,7 +20,6 @@ const fetch = require('node-fetch');
 const request = require('request');
 const sha256 = require('sha256');
 const execPhp = require('exec-php');
-const request = require("request");
 
 let Wit = null;
 let log = null;
