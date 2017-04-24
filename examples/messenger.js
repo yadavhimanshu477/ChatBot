@@ -21,6 +21,11 @@ const request = require('request');
 const sha256 = require('sha256');
 const execPhp = require('exec-php');
 
+var MongoClient = require('mongodb').MongoClient;
+global.MongoClient = MongoClient;
+
+var db = require('./db');
+
 let Wit = null;
 let log = null;
 try {
@@ -162,6 +167,13 @@ app.get('/', (req, res) => {
 
 app.get('/zalo', (req, res) => {
     console.log("inside zalo app")
+
+    db.getConnection(function (db) {
+        console.log("connected db from signup page : ")
+
+        console.log(db)
+
+    });
 
     var options = { method: 'POST',
         url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/phone/cs',
