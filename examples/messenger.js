@@ -180,6 +180,7 @@ app.get('/zalo', (req, res) => {
     // });
 
     db.getConnection(function (db) {
+        console.log(db)
         console.log("connected db from zalo contact page : ")
 
         // db.collection('teams', function(err, collection) {
