@@ -171,7 +171,7 @@ app.get('/zalo', (req, res) => {
     db.getConnection(function (db) {
         console.log("connected db from zalo contact page : ")
 
-        db.collection('zalo_contacts').find({"name":"amrita"}).toArray(function (err, resulte) {
+        db.collection('zalo_contacts').find({"name":"amrita"},function (err, resulte) {
 
             console.log(err)
 
