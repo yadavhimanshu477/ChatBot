@@ -169,18 +169,17 @@ app.get('/zalo', (req, res) => {
     console.log("inside zalo app")
 
     db.getConnection(function (db) {
-        console.log("connected db from zalo contact page : ")
-
-
-        db.getConnection(function (db) {
-            var col = db.collection('zalo_contacts')
-            var cursor = col.find().forEach( function (myDoc) {
-                console.log(myDoc) 
-                //data.push(myDoc)
-                //console.log(data)
-            });
+        var col = db.collection('zalo_contacts')
+        var cursor = col.find().forEach( function (myDoc) {
+            console.log(myDoc) 
+            //data.push(myDoc)
             //console.log(data)
         });
+        //console.log(data)
+    });
+
+    db.getConnection(function (db) {
+        console.log("connected db from zalo contact page : ")
 
         db.collection('zalo_contacts').find({"name":"amrita"}).forEach( function (err, resulte) {
 
