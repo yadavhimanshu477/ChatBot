@@ -184,7 +184,7 @@ app.get('/zalo', (req, res) => {
 
         db.collection('zalo_contacts').find({}, function (err, cursor) {
 
-            cursor.toArray(callback);
+            //cursor.toArray(callback);
 
             console.log(err)
             console.log(cursor);
