@@ -173,6 +173,8 @@ app.get('/zalo', (req, res) => {
 
         db.collection('zalo_contacts').find().toArray(function (err, resulte) {
 
+            console.log(err)
+
             console.log(resulte);
 
             var result = resulte[0];
