@@ -210,7 +210,7 @@ app.get('/zalo', (req, res) => {
             var timestamp = new Date().getTime();
             var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
 
-            var data = '{"phone":'+phone+',"templateid":'+templateid+',"templatedata":{"name":'+name+',"company":'+company+',"number":'+number+',"date":'+date+'}}';
+            var data = '{"phone":'+phone+',"templateid":'+templateid+',"templatedata":{"name":"'+name+'","company":"'+company+'","number":"'+number+'","date":"'+date+'"}}';
 
             console.log("ddddddaaaaattttttaaaa")
             console.log(data)
