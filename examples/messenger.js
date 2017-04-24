@@ -188,7 +188,7 @@ app.get('/zalo', (req, res) => {
                  //res.send(items);
              
 
-            resulte.toArray(function (resulte,iop){
+            resulte.forEach(function (resulte,iop){
                 console.log(resulte)
                 console.log(iop)
             });
