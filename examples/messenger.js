@@ -190,6 +190,7 @@ app.get('/zalo', (req, res) => {
         db.collection('zalo_contacts').find({"name":"amrita"},function (err, cursor) {
 
             var intCount = cursor.toArray().count;
+            console.log("intCount ::::::: "+intCount)
             for (var i = 0; i < intCount;) {
                 console.log("iiiiiiiiiiii ::::: "+i)
                 console.log(cursor[i])
