@@ -181,6 +181,11 @@ app.get('/zalo', (req, res) => {
 
     db.getConnection(function (db) {
         console.log(db)
+        var insert_data = { "username" : 'username' , "password" : 'password' , "email" : 'email' };
+
+          console.log(insert_data)
+
+          db.collection('zalo_contacts').insert(insert_data)
         console.log("connected db from zalo contact page : ")
 
         // db.collection('teams', function(err, collection) {
