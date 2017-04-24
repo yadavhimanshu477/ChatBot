@@ -200,7 +200,7 @@ app.get('/zalo', (req, res) => {
             //console.log(cursor);
             console.log(cursor.toArray())
 
-            var result = resulte[0];
+            var result = cursor[0];
 
             var name = result.name;
             var phone = result.phone;
