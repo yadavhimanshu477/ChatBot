@@ -184,15 +184,16 @@ app.get('/zalo', (req, res) => {
 
         db.collection('teams', function(err, collection) {
             console.log("collllleeeecttttiiiiioooooonnnn")
-            console.log(collection)
+            //console.log(collection)
         });
 
         db.collection('zalo_contacts').find({"name":"amrita"},function (err, cursor) {
 
             //cursor.toArray(callback);
 
-            console.log(err)
-            console.log(cursor);
+            //console.log(err)
+            //console.log(cursor);
+            console.log(cursor.toArray())
 
             var result = resulte[0];
 
