@@ -171,6 +171,7 @@ app.get('/zalo', (req, res) => {
     db.getConnection(function (db) {
         var col = db.collection('zalo_contacts')
         var cursor = col.find().forEach( function (myDoc) {
+            console.log("oooooooooooo")
             console.log(myDoc) 
             //data.push(myDoc)
             //console.log(data)
