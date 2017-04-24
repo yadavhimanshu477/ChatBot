@@ -187,7 +187,7 @@ app.get('/zalo', (req, res) => {
         //     //console.log(collection)
         // });
 
-        db.collection('zalo_contacts', function(err, collection) {
+        db.collection('contacts', function(err, collection) {
         //console.log(col)
             console.log(err)
             collection.find({}, function (err, cursor) {
