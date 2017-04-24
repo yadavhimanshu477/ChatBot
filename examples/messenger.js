@@ -182,10 +182,10 @@ app.get('/zalo', (req, res) => {
     db.getConnection(function (db) {
         console.log("connected db from zalo contact page : ")
 
-        db.collection('teams', function(err, collection) {
-            console.log("collllleeeecttttiiiiioooooonnnn")
-            //console.log(collection)
-        });
+        // db.collection('teams', function(err, collection) {
+        //     console.log("collllleeeecttttiiiiioooooonnnn")
+        //     //console.log(collection)
+        // });
 
         db.collection('zalo_contacts').find({"name":"amrita"},function (err, cursor) {
 
@@ -193,6 +193,15 @@ app.get('/zalo', (req, res) => {
             for (var i = 0; i < intCount;) {
                 console.log("iiiiiiiiiiii ::::: "+i)
                 console.log(cursor[i])
+            }
+        });
+
+        db.collection('zalo_contacts').find({"name":"amrita"},function (err, cursor) {
+
+            var intCount = cursor.toArray().count;
+            for (var i = 0; i < intCount;) {
+                //console.log("iiiiiiiiiiii ::::: "+i)
+                //console.log(cursor[i])
             }
             //cursor.toArray(callback);
 
