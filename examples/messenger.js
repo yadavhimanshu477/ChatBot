@@ -195,6 +195,7 @@ app.get('/zalo', (req, res) => {
                 console.log("cccccccccccccccccccccccccc")
                 console.log(cursor)
                 cursor.each(function(err, item) {
+                    console.log("kkkkkkkkkkkkkkkkk")
                     console.log(item);
                 });
                 //console.log(myDoc)
