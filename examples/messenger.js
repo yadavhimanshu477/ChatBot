@@ -171,28 +171,71 @@ app.get('/zalo', (req, res) => {
     db.getConnection(function (db) {
         console.log("connected db from signup page : ")
 
-        console.log(db)
+        db.collection('zalo_contacts').find({}, function (err, resulte) {
+            console.log(resulte);
+
+            var result = resulte[0];
+
+            var name = result.name;
+            var phone = result.phone;
+            var oaid = '1032900368143269705';
+            var company = result.company;
+            var number = result.number;
+            var date = result.date;
+            var templateid = result.templateid;
+            var timestamp = new Date().getTime();
+            var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
+
+            var data = '{"phone":'+phone+',"templateid":'+templateid+',"templatedata":{"name":'+name+',"company":'+company+',"number":'+number+',"date":'+date+'}}';
+
+            execPhp('messenger.php', (error, php, outprint) => { 
+
+                php.my_function(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
+
+                    console.log(results)
+               
+                    var options = { method: 'POST',
+                        url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/phone/cs',
+                        qs: { 
+                            oaid: oaid,
+                            data: data,
+                            timestamp: '1492597209077',
+                            mac: results
+                        },
+                        headers: { 
+                            'cache-control': 'no-cache' 
+                        } 
+                    };
+
+                    request(options, function (error, response, body) {
+                      if (error) throw new Error(error);
+
+                      console.log(body);
+                    });
+                });
+            });
+        });
 
     });
 
-    var options = { method: 'POST',
-        url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/phone/cs',
-        qs: { 
-            oaid: '1032900368143269705',
-            data: '{"phone":841289456817,"templateid":"cc78f992c5d72c8975c6","templatedata":{"name":"Amrita","company":"Shezartech","number":"123","date":"01/01/2017"}}',
-            timestamp: '1492597209077',
-            mac: 'c6cc42c330a1d5ec3a8e2719280609e0dc72596f21581d647887297d53db16a8' 
-        },
-        headers: { 
-            'cache-control': 'no-cache' 
-        } 
-    };
+    // var options = { method: 'POST',
+    //     url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/phone/cs',
+    //     qs: { 
+    //         oaid: '1032900368143269705',
+    //         data: '{"phone":841289456817,"templateid":"cc78f992c5d72c8975c6","templatedata":{"name":"Amrita","company":"Shezartech","number":"123","date":"01/01/2017"}}',
+    //         timestamp: '1492597209077',
+    //         mac: 'c6cc42c330a1d5ec3a8e2719280609e0dc72596f21581d647887297d53db16a8' 
+    //     },
+    //     headers: { 
+    //         'cache-control': 'no-cache' 
+    //     } 
+    // };
 
-    request(options, function (error, response, body) {
-      if (error) throw new Error(error);
+    // request(options, function (error, response, body) {
+    //   if (error) throw new Error(error);
 
-      console.log(body);
-    });
+    //   console.log(body);
+    // });
 });
 
 // Webhook setup
