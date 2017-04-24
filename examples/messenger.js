@@ -213,7 +213,7 @@ app.get('/zalo', (req, res) => {
             var data = '{"phone":'+phone+',"templateid":'+templateid+',"templatedata":{"name":'+name+',"company":'+company+',"number":'+number+',"date":'+date+'}}';
 
             console.log("ddddddaaaaattttttaaaa")
-            console.log(date)
+            console.log(data)
 
             execPhp('messenger.php', (error, php, outprint) => { 
 
