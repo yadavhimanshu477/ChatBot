@@ -187,15 +187,21 @@ app.get('/zalo', (req, res) => {
         //     //console.log(collection)
         // });
 
-        db.collection('contacts', function(err, collection) {
+        db.listCollections().toArray(function(err, collInfos) {
+            console.log(collInfos)
+            // collInfos is an array of collection info objects that look like:
+            // { name: 'test', options: {} }
+        });
+
+        db.collection('zalo_contacts', function(err, collection) {
         //console.log(col)
             console.log(err)
             collection.find({}, function (err, cursor) {
             //db.collection('zalo_contacts').find({},function (err, cursor) {
                 var myDocument = cursor[1];
-                console.log(myDocument)
+                //console.log(myDocument)
                 console.log("cccccccccccccccccccccccccc")
-                console.log(cursor)
+                //console.log(cursor)
                 cursor.each(function(err, item) {
                     console.log("kkkkkkkkkkkkkkkkk")
                     console.log(item);
