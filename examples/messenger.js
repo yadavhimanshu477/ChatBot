@@ -160,6 +160,10 @@ app.get('/', (req, res) => {
     res.send("https server started successfully....")
 });
 
+app.get('/zalo', (req, res) => {
+    console.log("inside zalo app")
+});
+
 // Webhook setup
 app.get('/webhook', (req, res) => {
 
