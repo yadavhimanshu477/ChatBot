@@ -173,11 +173,11 @@ app.get('/zalo', (req, res) => {
 
 
         db.getConnection(function (db) {
-            var col = db.collection('contacts')
+            var col = db.collection('zalo_contacts')
             var cursor = col.find().forEach( function (myDoc) {
                 console.log(myDoc) 
-                data.push(myDoc)
-                console.log(data)
+                //data.push(myDoc)
+                //console.log(data)
             });
             //console.log(data)
         });
