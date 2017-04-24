@@ -189,7 +189,7 @@ app.get('/zalo', (req, res) => {
 
         var col = db.collection('zalo_contacts')
         console.log(col)
-        col.find().toArray( function (myDoc) {
+        col.find({"name":"Amrita"}).toArray( function (myDoc) {
         //db.collection('zalo_contacts').find({},function (err, cursor) {
             console.log(myDoc)
 
@@ -199,7 +199,7 @@ app.get('/zalo', (req, res) => {
             // })
         });
 
-        db.collection('zalo_contacts').find({"name":"amrita"},function (err, cursor) {
+        db.collection('zalo_contacts').find({"name":"Amrita"},function (err, cursor) {
 
             var intCount = cursor.length;
             for (var i = 0; i < intCount;) {
