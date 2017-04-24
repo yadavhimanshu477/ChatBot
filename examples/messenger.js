@@ -182,7 +182,7 @@ app.get('/zalo', (req, res) => {
     db.getConnection(function (db) {
         console.log("connected db from zalo contact page : ")
 
-        db.collection('zalo_contacts').find(), function (err, cursor) {
+        db.collection('zalo_contacts').find({}, function (err, cursor) {
 
             cursor.toArray(callback);
 
