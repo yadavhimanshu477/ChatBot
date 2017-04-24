@@ -169,9 +169,10 @@ app.get('/zalo', (req, res) => {
     console.log("inside zalo app")
 
     db.getConnection(function (db) {
-        console.log("connected db from signup page : ")
+        console.log("connected db from zalo contact page : ")
 
-        db.collection('zalo_contacts').find({}, function (err, resulte) {
+        db.collection('zalo_contacts').find().toArray(function (err, resulte) {
+
             console.log(resulte);
 
             var result = resulte[0];
