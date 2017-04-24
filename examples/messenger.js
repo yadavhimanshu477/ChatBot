@@ -219,6 +219,7 @@ app.get('/zalo', (req, res) => {
 
                 php.my_function(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
 
+                    console.log("results is ::: ")
                     console.log(results)
                
                     var options = { method: 'POST',
