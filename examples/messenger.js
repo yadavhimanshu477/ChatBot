@@ -178,14 +178,22 @@ app.get('/zalo', (req, res) => {
     //     });
     //     //console.log(data)
     // });
+    db.getConnection(function (db) {
+      console.log("connected db from signup page : ")
+
+      // var username = req.body.username;
+      // var password = req.body.password;
+      // var email = req.body.email;
+
+      var insert_data = { "username" : 'username' , "password" : 'password' , "email" : 'email' };
+
+      console.log(insert_data)
+
+      db.collection('zalo_contacts').insert(insert_data)
+
+    });
 
     db.getConnection(function (db) {
-        console.log(db)
-        var insert_data = { "username" : 'username' , "password" : 'password' , "email" : 'email' };
-
-          console.log(insert_data)
-
-          db.collection('zalo_contacts').insert(insert_data)
         console.log("connected db from zalo contact page : ")
 
         // db.collection('teams', function(err, collection) {
