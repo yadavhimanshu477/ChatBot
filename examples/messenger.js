@@ -192,6 +192,8 @@ app.get('/zalo', (req, res) => {
             console.log(err)
             collection.find({}, function (err, cursor) {
             //db.collection('zalo_contacts').find({},function (err, cursor) {
+                console.log("cccccccccccccccccccccccccc")
+                console.log(cursor)
                 cursor.each(function(err, item) {
                     console.log(item);
                 });
