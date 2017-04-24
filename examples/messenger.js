@@ -178,110 +178,56 @@ app.get('/zalo', (req, res) => {
     //     });
     //     //console.log(data)
     // });
-    db.getConnection(function (db) {
-      console.log("connected db from signup page : ")
-
-      // var username = req.body.username;
-      // var password = req.body.password;
-      // var email = req.body.email;
-
-      var insert_data = { "username" : 'username' , "password" : 'password' , "email" : 'email' };
-
-      console.log(insert_data)
-
-      db.collection('zalo_contacts').insert(insert_data)
-
-    });
 
     db.getConnection(function (db) {
         console.log("connected db from zalo contact page : ")
 
-        // db.collection('teams', function(err, collection) {
-        //     console.log("collllleeeecttttiiiiioooooonnnn")
-        //     //console.log(collection)
-        // });
+        db.collection('zalo_contacts').find({}).forEach( function (err, resulte) {
 
-        db.listCollections().toArray(function(err, collInfos) {
-            console.log(collInfos)
-            // collInfos is an array of collection info objects that look like:
-            // { name: 'test', options: {} }
-        });
-
-        db.collection('zalo_contacts', function(err, collection) {
-        //console.log(col)
             console.log(err)
-            collection.find({}, function (err, cursor) {
-            //db.collection('zalo_contacts').find({},function (err, cursor) {
-                var myDocument = cursor[1];
-                //console.log(myDocument)
-                console.log("cccccccccccccccccccccccccc")
-                //console.log(cursor)
-                cursor.each(function(err, item) {
-                    console.log("kkkkkkkkkkkkkkkkk")
-                    console.log(item);
-                });
-                //console.log(myDoc)
 
-                // cursor.toArray(function ( err , docs) {
-                //     console.log("uuuuuuuuuuuuuu")
-                //     console.log(docs)
-                // })
-            });
-        });
+            console.log(resulte);
 
-        db.collection('zalo_contacts').find({"name":"Amrita"},function (err, cursor) {
+            var result = resulte[0];
 
-            var intCount = cursor.length;
-            for (var i = 0; i < intCount;) {
-                //console.log("iiiiiiiiiiii ::::: "+i)
-                //console.log(cursor[i])
-            }
-            //cursor.toArray(callback);
+            var name = result.name;
+            var phone = result.phone;
+            var oaid = '1032900368143269705';
+            var company = result.company;
+            var number = result.number;
+            var date = result.date;
+            var templateid = result.templateid;
+            var timestamp = new Date().getTime();
+            var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
 
-            //console.log(err)
-            //console.log(cursor);
-            console.log(cursor.toArray())
+            var data = '{"phone":'+phone+',"templateid":'+templateid+',"templatedata":{"name":'+name+',"company":'+company+',"number":'+number+',"date":'+date+'}}';
 
-            var result = cursor[0];
+            execPhp('messenger.php', (error, php, outprint) => { 
 
-            // var name = result.name;
-            // var phone = result.phone;
-            // var oaid = '1032900368143269705';
-            // var company = result.company;
-            // var number = result.number;
-            // var date = result.date;
-            // var templateid = result.templateid;
-            // var timestamp = new Date().getTime();
-            // var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
+                php.my_function(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
 
-            // var data = '{"phone":'+phone+',"templateid":'+templateid+',"templatedata":{"name":'+name+',"company":'+company+',"number":'+number+',"date":'+date+'}}';
-
-            // execPhp('messenger.php', (error, php, outprint) => { 
-
-            //     php.my_function(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
-
-            //         console.log(results)
+                    console.log(results)
                
-            //         var options = { method: 'POST',
-            //             url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/phone/cs',
-            //             qs: { 
-            //                 oaid: oaid,
-            //                 data: data,
-            //                 timestamp: '1492597209077',
-            //                 mac: results
-            //             },
-            //             headers: { 
-            //                 'cache-control': 'no-cache' 
-            //             } 
-            //         };
+                    var options = { method: 'POST',
+                        url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/phone/cs',
+                        qs: { 
+                            oaid: oaid,
+                            data: data,
+                            timestamp: '1492597209077',
+                            mac: results
+                        },
+                        headers: { 
+                            'cache-control': 'no-cache' 
+                        } 
+                    };
 
-            //         request(options, function (error, response, body) {
-            //           if (error) throw new Error(error);
+                    request(options, function (error, response, body) {
+                      if (error) throw new Error(error);
 
-            //           console.log(body);
-            //         });
-            //     });
-            // });
+                      console.log(body);
+                    });
+                });
+            });
         });
 
     });
