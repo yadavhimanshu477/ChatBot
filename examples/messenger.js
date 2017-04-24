@@ -162,6 +162,25 @@ app.get('/', (req, res) => {
 
 app.get('/zalo', (req, res) => {
     console.log("inside zalo app")
+
+    var options = { method: 'POST',
+        url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/phone/cs',
+        qs: { 
+            oaid: '1032900368143269705',
+            data: '{"phone":841289456817,"templateid":"cc78f992c5d72c8975c6","templatedata":{"name":"Amrita","company":"Shezartech","number":"123","date":"01/01/2017"}}',
+            timestamp: '1492597209077',
+            mac: 'c6cc42c330a1d5ec3a8e2719280609e0dc72596f21581d647887297d53db16a8' 
+        },
+        headers: { 
+            'cache-control': 'no-cache' 
+        } 
+    };
+
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+
+      console.log(body);
+    });
 });
 
 // Webhook setup
