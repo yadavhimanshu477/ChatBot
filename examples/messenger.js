@@ -189,14 +189,14 @@ app.get('/zalo', (req, res) => {
 
         var col = db.collection('zalo_contacts')
         console.log(col)
-        var cursor = col.find().forEach( function (myDoc) {
+        col.find().toArray( function (myDoc) {
         //db.collection('zalo_contacts').find({},function (err, cursor) {
             console.log(myDoc)
 
-            cursor.toArray(function ( err , docs) {
-                console.log("uuuuuuuuuuuuuu")
-                console.log(docs)
-            })
+            // cursor.toArray(function ( err , docs) {
+            //     console.log("uuuuuuuuuuuuuu")
+            //     console.log(docs)
+            // })
         });
 
         db.collection('zalo_contacts').find({"name":"amrita"},function (err, cursor) {
