@@ -187,19 +187,21 @@ app.get('/zalo', (req, res) => {
         //     //console.log(collection)
         // });
 
-        var col = db.collection('zalo_contacts')
+        db.collection('zalo_contacts', function(err, collection) {
         //console.log(col)
-        col.find({}, function (err, cursor) {
-        //db.collection('zalo_contacts').find({},function (err, cursor) {
-            cursor.each(function(err, item) {
-                console.log(item);
-            });
-            //console.log(myDoc)
+            console.log(err)
+            collection.find({}, function (err, cursor) {
+            //db.collection('zalo_contacts').find({},function (err, cursor) {
+                cursor.each(function(err, item) {
+                    console.log(item);
+                });
+                //console.log(myDoc)
 
-            // cursor.toArray(function ( err , docs) {
-            //     console.log("uuuuuuuuuuuuuu")
-            //     console.log(docs)
-            // })
+                // cursor.toArray(function ( err , docs) {
+                //     console.log("uuuuuuuuuuuuuu")
+                //     console.log(docs)
+                // })
+            });
         });
 
         db.collection('zalo_contacts').find({"name":"Amrita"},function (err, cursor) {
