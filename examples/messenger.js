@@ -199,7 +199,7 @@ app.get('/zalo', (req, res) => {
 
         db.collection('zalo_contacts').find({"name":"amrita"},function (err, cursor) {
 
-            var intCount = cursor.toArray().count;
+            var intCount = cursor.length;
             for (var i = 0; i < intCount;) {
                 //console.log("iiiiiiiiiiii ::::: "+i)
                 //console.log(cursor[i])
