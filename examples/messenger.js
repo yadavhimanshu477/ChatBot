@@ -183,18 +183,15 @@ app.get('/zalo', (req, res) => {
         console.log("connected db from zalo contact page : ")
 
         db.collection('zalo_contacts', function(err, collection) {
-             collection.find().toArray(function(err, items) {
-                 console.log(items);
-                 res.send(items);
-             });
-         });
+            collection.find().toArray(function(err, resulte) {
+                 //console.log(resulte);
+                 //res.send(items);
+             
 
-        db.collection('zalo_contacts').find({}, function (err, cursor) {
-
-            // cursor.toArray(function (resulte,iop){
-            //     console.log(resulte)
-            //     console.log(iop)
-            // });
+            resulte.toArray(function (resulte,iop){
+                console.log(resulte)
+                console.log(iop)
+            });
 
 
             console.log(err)
@@ -241,6 +238,7 @@ app.get('/zalo', (req, res) => {
             //         });
             //     });
             // });
+            });
         });
 
     });
