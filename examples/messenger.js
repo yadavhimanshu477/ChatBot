@@ -189,7 +189,7 @@ app.get('/zalo', (req, res) => {
 
         var col = db.collection('zalo_contacts')
         //console.log(col)
-        col.find({"name":"Amrita"}), function (err, cursor) {
+        col.find({"name":"Amrita"}, function (err, cursor) {
         //db.collection('zalo_contacts').find({},function (err, cursor) {
             cursor.each(function(err, item) {
                 console.log(item);
