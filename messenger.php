@@ -5,9 +5,9 @@
 
     	//echo $sender;
 
-    	$arr = array('uid'=>(int)$sender,'message'=>$text);
+    	//$arr = array('uid'=>(int)$sender,'message'=>$text);
 
-    	$data = json_encode();
+    	//$data = json_encode();
     	//echo $data;
 
     	$passcode = (int)$oaid.$data.$timestamp.$secretkey;
