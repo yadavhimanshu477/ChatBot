@@ -189,6 +189,7 @@ app.get('/zalo', (req, res) => {
                     var templateid = result.templateid;
                     var timestamp = new Date().getTime();
                     var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
+                    console.log("wwwwwwwwwwwwwww ::::: "+timestamp)
                     timestamp = 1492597209077;
 
                     console.log("timestamp :: "+timestamp)
