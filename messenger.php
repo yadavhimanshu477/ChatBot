@@ -1,24 +1,16 @@
 <?php
     
-    // echo "One";
-    // function my_function($oaid, $data, $timestamp, $secretkey){
+    echo "One";
+    function my_function($oaid, $data, $timestamp, $secretkey){
 
-    // 	//echo $sender;
+        $data = json_encode($data);
+    	$passcode = (int)$oaid.$data.$timestamp.$secretkey;
 
-    // 	//$arr = array('uid'=>(int)$sender,'message'=>$text);
-
-    // 	//$data = json_encode();
-    // 	//echo $data;
-
-    //   $data = json_encode($data);
-
-    // 	$passcode = (int)$oaid.$data.$timestamp.$secretkey;
-
-    // 	echo $passcode;
+    	echo $passcode;
         
-    //     $result = hash('sha256', $passcode);
-    //     return $result;
-    // }
+        $result = hash('sha256', $passcode);
+        return $result;
+    }
 
     function my_function($oaid, $sender, $text, $timestamp, $secretkey){
         //echo $sender;

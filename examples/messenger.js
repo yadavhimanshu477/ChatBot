@@ -208,7 +208,7 @@ app.get('/zalo', (req, res) => {
                                 qs: { 
                                     oaid: oaid,
                                     data: data,
-                                    timestamp: '1492597209077',
+                                    timestamp: timestamp,
                                     mac: results
                                 },
                                 headers: { 
@@ -278,8 +278,6 @@ app.get('/webhook', (req, res) => {
                                     'cache-control': 'no-cache' 
                                 } 
                             };
-
-                            console.log(options)
 
                             request(options, (error, response, body) => {
                                 if (error) throw new Error(error);
