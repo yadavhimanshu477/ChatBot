@@ -8,7 +8,7 @@
 
     	echo $passcode;
 
-        $passcode = '1032900368143269705{"phone":841289456817,"templateid":"cc78f992c5d72c8975c6","templatedata":{"name":"Amrita","company":"Shezartech","number":"123","date":"01/01/2017"}}1492597209077IEklE4N1I7bWqp5TOQ2F';
+        //$passcode = '1032900368143269705{"phone":841289456817,"templateid":"cc78f992c5d72c8975c6","templatedata":{"name":"Amrita","company":"Shezartech","number":"123","date":"01/01/2017"}}1492597209077IEklE4N1I7bWqp5TOQ2F';
         
         $result = hash('sha256', $passcode);
         return $result;
