@@ -197,7 +197,7 @@ app.get('/zalo', (req, res) => {
 
                     execPhp('messenger.php', (error, php, outprint) => { 
 
-                        php.my_function(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
+                        php.my_function_zalo(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
 
                             console.log("results is ::: ")
                             console.log(results)

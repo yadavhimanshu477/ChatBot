@@ -1,7 +1,7 @@
 <?php
     
     echo "One";
-    function my_function($oaid, $data, $timestamp, $secretkey){
+    function my_function_zalo($oaid, $data, $timestamp, $secretkey){
 
         $data = json_encode($data);
     	$passcode = (int)$oaid.$data.$timestamp.$secretkey;
