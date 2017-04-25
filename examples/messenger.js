@@ -201,6 +201,10 @@ app.get('/zalo', (req, res) => {
 
                             console.log("results is ::: ")
                             console.log(results)
+                            console.log("printed is ::::: ")
+                            console.log(printed)
+                            console.log("output is :::: ")
+                            console.log(output)
                             var results = 'c6cc42c330a1d5ec3a8e2719280609e0dc72596f21581d647887297d53db16a8';
                        
                             var options = { method: 'POST',
