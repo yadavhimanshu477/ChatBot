@@ -249,7 +249,7 @@ app.get('/webhook', (req, res) => {
             // Now it's waiting for further messages to proceed.
 
             if(context.type == 'action') {
-                zaloMessegeFunction(sender, function (msg) {
+                zaloMessegeFunction.getDueDate(sender, function (msg) {
                     console.log("msg is the ::::::: ")
                     console.log(msg)
                 })
