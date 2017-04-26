@@ -252,48 +252,48 @@ app.get('/webhook', (req, res) => {
                 zaloMessegeFunction.getDueDate(sender, function (msg) {
                     console.log("msg is the ::::::: ")
                     console.log(msg)
-                    context.msg = msg;
+                    //context.msg = msg;
             //     })
             // }
 
-            execPhp('messenger.php', (error, php, outprint) => {
+                    execPhp('messenger.php', (error, php, outprint) => {
 
-                php.my_function(oaid, sender, msg, timestamp, secretkey, (err, result, output, printed) => {
+                        php.my_function(oaid, sender, msg, timestamp, secretkey, (err, result, output, printed) => {
 
-                    var options = { method: 'POST',
-                        url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
-                        qs: { 
-                            oaid: oaid,
-                            timestamp: timestamp,
-                            mac: result,
-                            data: '{"uid":'+sender+',"message":"'+msg+'"}' 
-                        },
-                        headers: {
-                            'cache-control': 'no-cache' 
-                        } 
-                    };
+                            var options = { method: 'POST',
+                                url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
+                                qs: { 
+                                    oaid: oaid,
+                                    timestamp: timestamp,
+                                    mac: result,
+                                    data: '{"uid":'+sender+',"message":"'+msg+'"}' 
+                                },
+                                headers: {
+                                    'cache-control': 'no-cache' 
+                                } 
+                            };
 
-                    console.log(options)
+                            console.log(options)
 
-                    request(options, (error, response, body) => {
-                        if (error) throw new Error(error);
-                        console.log(body);
+                            request(options, (error, response, body) => {
+                                if (error) throw new Error(error);
+                                console.log(body);
+                            });
+
+                            console.log('Waiting for next user messages');
+
+                            // Based on the session state, you might want to reset the session.
+                            // This depends heavily on the business logic of your bot.
+                            // Example:
+                            // if (context['done']) {
+                              delete sessions[sessionId];
+                            // }
+
+                            // Updating the user's current session state
+                            //sessions[sessionId].context = context;
+                        });
                     });
-
-                    console.log('Waiting for next user messages');
-
-                    // Based on the session state, you might want to reset the session.
-                    // This depends heavily on the business logic of your bot.
-                    // Example:
-                    // if (context['done']) {
-                      delete sessions[sessionId];
-                    // }
-
-                    // Updating the user's current session state
-                    //sessions[sessionId].context = context;
-                });
-            });
-            })
+                })
             }
         })
         .catch((err) => {
