@@ -266,12 +266,14 @@ app.get('/webhook', (req, res) => {
                             oaid: oaid,
                             timestamp: timestamp,
                             mac: result,
-                            data: '{"uid":'+sender+',"message":"'+context.msg+'"}' 
+                            data: '{"uid":'+sender+',"message":"'+msg+'"}' 
                         },
                         headers: {
                             'cache-control': 'no-cache' 
                         } 
                     };
+
+                    console.log(options)
 
                     request(options, (error, response, body) => {
                         if (error) throw new Error(error);
