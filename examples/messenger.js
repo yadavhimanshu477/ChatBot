@@ -248,18 +248,18 @@ app.get('/webhook', (req, res) => {
             // Our bot did everything it has to do.
             // Now it's waiting for further messages to proceed.
 
-            // if(context.type == 'action') {
-            //     zaloMessegeFunction.getDueDate(sender, function (msg) {
-            //         console.log("msg is the ::::::: ")
-            //         console.log(msg)
+            if(context.type == 'action') {
+                zaloMessegeFunction.getDueDate(sender, function (msg) {
+                    console.log("msg is the ::::::: ")
+                    console.log(msg)
                     //context.msg = msg;
             //     })
             // }
-                    //msg = '"'+msg+'"';
+                    
 
                     execPhp('messenger.php', (error, php, outprint) => {
 
-                        php.my_function(oaid, sender, context.msg, timestamp, secretkey, (err, result, output, printed) => {
+                        php.my_function(oaid, sender, msg, timestamp, secretkey, (err, result, output, printed) => {
 
                             var options = { method: 'POST',
                                 url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
@@ -267,7 +267,7 @@ app.get('/webhook', (req, res) => {
                                     oaid: oaid,
                                     timestamp: timestamp,
                                     mac: result,
-                                    data: '{"uid":'+sender+',"message":"'+context.msg+'"}' 
+                                    data: '{"uid":'+sender+',"message":"'+msg+'"}' 
                                 },
                                 headers: {
                                     'cache-control': 'no-cache' 
@@ -294,8 +294,8 @@ app.get('/webhook', (req, res) => {
                             //sessions[sessionId].context = context;
                         });
                     });
-                //})
-            //}
+                })
+            }
         })
         .catch((err) => {
             console.error('Oops! Got an error from Wit: ', err.stack || err);
