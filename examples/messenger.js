@@ -253,8 +253,8 @@ app.get('/webhook', (req, res) => {
                     console.log("msg is the ::::::: ")
                     console.log(msg)
                     context.msg = msg;
-                })
-            }
+            //     })
+            // }
 
             execPhp('messenger.php', (error, php, outprint) => {
 
@@ -291,6 +291,8 @@ app.get('/webhook', (req, res) => {
                     //sessions[sessionId].context = context;
                 });
             });
+            })
+            }
         })
         .catch((err) => {
             console.error('Oops! Got an error from Wit: ', err.stack || err);
