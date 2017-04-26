@@ -8,8 +8,9 @@ module.exports = {
         	db.collection('zalo_contacts', function(err, collection) {
             	collection.find({"uid":uid}).toArray(function(err, resulte) {
             		resulte.forEach(function (resulte,iop){
-            			var string_result = "Your Due Date is"
-            			console.log(resulte);
+            			console.log(typeof(resulte.date))
+            			var string_result = "Your Due Date is"+resulte.date;
+            			console.log(string_result);
             			callback(string_result);
             		});
             	});
