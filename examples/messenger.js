@@ -20,7 +20,7 @@ const fetch = require('node-fetch');
 const request = require('request');
 const sha256 = require('sha256');
 const execPhp = require('exec-php');
-const zaloMessegeFunction = require('zaloMessegeFunction');
+const zaloMessegeFunction = require('./zaloMessegeFunction');
 
 var MongoClient = require('mongodb').MongoClient;
 global.MongoClient = MongoClient;
