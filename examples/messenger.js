@@ -252,6 +252,7 @@ app.get('/webhook', (req, res) => {
                 zaloMessegeFunction.getDueDate(sender, function (msg) {
                     console.log("msg is the ::::::: ")
                     console.log(msg)
+                    context.msg = msg;
                 })
             }
 
