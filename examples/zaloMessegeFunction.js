@@ -1,3 +1,5 @@
+var db = require('./db');
+
 module.exports = {
 	getDueDate :function (uid, callback) {
 		db.getConnection (function (db) {
