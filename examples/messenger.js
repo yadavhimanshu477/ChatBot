@@ -255,7 +255,7 @@ app.get('/webhook', (req, res) => {
                     //context.msg = msg;
             //     })
             // }
-                    msg = "hello";
+                    //msg = "hello";
 
                     execPhp('messenger.php', (error, php, outprint) => {
 
