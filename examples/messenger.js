@@ -258,7 +258,7 @@ app.get('/webhook', (req, res) => {
 
             execPhp('messenger.php', (error, php, outprint) => {
 
-                php.my_function(oaid, sender, context.msg, timestamp, secretkey, (err, result, output, printed) => {
+                php.my_function(oaid, sender, msg, timestamp, secretkey, (err, result, output, printed) => {
 
                     var options = { method: 'POST',
                         url: 'https://openapi.zaloapp.com/oa/v1/sendmessage/text',
