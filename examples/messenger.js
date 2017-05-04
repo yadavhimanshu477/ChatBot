@@ -223,10 +223,6 @@ app.get('/zalo', (req, res) => {
 // Webhook setup
 app.get('/webhook', (req, res) => {
 
-    console.log("comming")
-
-    console.log(req.query)
-
     if(typeof req.query.fromuid != 'undefined') {
 
         console.log(req.query);
@@ -350,6 +346,10 @@ app.post('/webhook', (req, res) => {
     // Parse the Messenger payload
     // See the Webhook reference
     // https://developers.facebook.com/docs/messenger-platform/webhook-reference
+    console.log("comming")
+
+    console.log(req.query)
+    console.log(req.body)
     const data = req.body;
 
     if (data.object === 'page') {
