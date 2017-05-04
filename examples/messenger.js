@@ -223,6 +223,8 @@ app.get('/zalo', (req, res) => {
 // Webhook setup
 app.get('/webhook', (req, res) => {
 
+    console.log(req.query)
+
     if(typeof req.query.fromuid != 'undefined') {
 
         console.log(req.query);

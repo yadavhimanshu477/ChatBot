@@ -1,7 +1,7 @@
 var db = require('./db');
 
 module.exports = {
-	getDueDate :function (uid, callback) {
+	getDueDate : function (uid, callback) {
 		db.getConnection (function (db) {
         	console.log("connected db from zalomessageFunction page : ")
 
@@ -16,6 +16,10 @@ module.exports = {
             	});
             });
         });
+	},
+
+	getCurrentBal : function (uid, callback) {
+
 	},
 
 	
