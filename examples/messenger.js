@@ -174,6 +174,7 @@ app.get('/', (req, res) => {
                 resulte.forEach(function (resulte,iop){
 
                     var oaid = '1032900368143269705';
+                    var phone = resulte.phone;
                     var msgid = resulte.msgid;
                     var timestamp = new Date().getTime();
                     var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
@@ -196,6 +197,11 @@ app.get('/', (req, res) => {
                             request(options, function (error, response, body) {
                                 if (error) throw new Error(error);
                                 console.log(body);
+                                db.getConnection(function (db) {
+                                    console.log("connected db from log page : ")
+                                    var insert_data = { phone : phone, time : timestamp, delivery_status : body.data.status, msgid : msgid }
+                                    db.collection('delivery_status').update({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
+                                });
                             });
                         });
                     });
