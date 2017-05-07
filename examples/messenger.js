@@ -276,7 +276,7 @@ app.get('/webhook', (req, res) => {
                                 console.log("body.errorMsg is ::: "+body.errorMsg)
                                 db.getConnection(function (db) {
                                     console.log("connected db from log page : ")
-                                    var insert_data = { fromuid : fromuid, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg }
+                                    var insert_data = { fromuid : sender, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg }
                                     db.collection('log').insert(insert_data);
                                 });
                             });
@@ -320,7 +320,7 @@ app.get('/webhook', (req, res) => {
                             console.log("body.errorMsg is ::: "+body.errorMsg)
                             db.getConnection(function (db) {
                                 console.log("connected db from log page : ")
-                                var insert_data = { fromuid : fromuid, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg }
+                                var insert_data = { fromuid : sender, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg }
                                 db.collection('log').insert(insert_data);
                             });
                         });
