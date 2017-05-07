@@ -273,6 +273,7 @@ app.get('/webhook', (req, res) => {
                             request(options, (error, response, body) => {
                                 if (error) throw new Error(error);
                                 console.log(body);
+                                body = JSON.parse(body)
                                 console.log("body.errorMsg is ::: "+body.errorMsg)
                                 db.getConnection(function (db) {
                                     console.log("connected db from log page : ")
