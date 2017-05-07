@@ -174,7 +174,7 @@ app.get('/', (req, res) => {
                 resulte.forEach(function (resulte,iop){
 
                     var oaid = '1032900368143269705';
-                    var msgid = resulte.msgid;
+                    var msgid = ''+resulte.msgid;
                     var timestamp = new Date().getTime();
                     var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
 
