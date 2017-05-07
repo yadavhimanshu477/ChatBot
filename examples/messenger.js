@@ -197,11 +197,10 @@ app.get('/', (req, res) => {
                             request(options, function (error, response, body) {
                                 if (error) throw new Error(error);
                                 console.log(body);
-                                db.getConnection(function (db) {
-                                    console.log("connected db from log page : ")
-                                    var insert_data = { phone : phone, time : timestamp, delivery_status : body.data.status, msgid : msgid }
-                                    db.collection('delivery_status').update({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
-                                });
+                                console.log("connected db from log page : ")
+                                var insert_data = { phone : phone, time : timestamp, delivery_status : body.data.status, msgid : msgid }
+                                db.collection('delivery_status').update({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
+                            
                             });
                         });
                     });
