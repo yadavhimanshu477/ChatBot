@@ -174,7 +174,7 @@ app.get('/', (req, res) => {
                 resulte.forEach(function (resulte,iop){
 
                     var oaid = '1032900368143269705';
-                    var msgid = ''+resulte.msgid;
+                    var msgid = resulte.msgid;
                     var timestamp = new Date().getTime();
                     var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
 
@@ -196,11 +196,6 @@ app.get('/', (req, res) => {
                             request(options, function (error, response, body) {
                                 if (error) throw new Error(error);
                                 console.log(body);
-                                // db.getConnection(function (db) {
-                                //     console.log("connected db from log page : ")
-                                //     var insert_data = { phone : phone, broad_msg : templateid, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
-                                //     db.collection('log').insert(insert_data);
-                                // });
                             });
                         });
                     });
@@ -371,7 +366,7 @@ app.get('/webhook', (req, res) => {
                             console.log("body.errorMsg is ::: "+body.errorMsg)
                             db.getConnection(function (db) {
                                 console.log("connected db from log page : ")
-                                var insert_data = { fromuid : sender, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg }
+                                var insert_data = { fromuid : sender, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
                                 db.collection('log').insert(insert_data);
                             });
                         });
