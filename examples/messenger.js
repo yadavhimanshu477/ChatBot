@@ -203,7 +203,6 @@ app.get('/', (req, res) => {
                                 if(body.data) {
                                     var insert_data = { fromuid : fromuid, time : timestamp, delivery_status : body.data.status, msgid : msgid }
                                     db.collection('delivery_status').update({ fromuid:fromuid, msgid:msgid }, insert_data, { upsert : true });
-                                    // db.somecollection.update({name: "some name"},{$set: {"lastseen": "2012-12-28"},$setOnInsert: {"firstseen": <TIMESTAMP>  # set on insert, not on update}},{upsert:true})
                                 }
                             
                             });
@@ -259,11 +258,11 @@ app.get('/zalo', (req, res) => {
                             request(options, function (error, response, body) {
                                 if (error) throw new Error(error);
                                 console.log(body);
-                                db.getConnection(function (db) {
+                                //db.getConnection(function (db) {
                                     console.log("connected db from log page : ")
                                     var insert_data = { phone : phone, broad_msg : templateid, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
                                     db.collection('log').insert(insert_data);
-                                });
+                                //});
                             });
                         });
                     });
