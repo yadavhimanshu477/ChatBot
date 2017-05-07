@@ -168,7 +168,7 @@ app.get('/', (req, res) => {
 
     db.getConnection(function (db) {
         console.log("connected db root page : ")
-        db.collection('log', function(err, collection) {
+        db.collection('status_log', function(err, collection) {
             collection.find().toArray(function(err, resulte) {
 
                 resulte.forEach(function (resulte,iop){
@@ -262,7 +262,7 @@ app.get('/zalo', (req, res) => {
                                 if(body.data) {
                                     console.log("connected db from log page : ")
                                     var insert_data = { phone : phone, broad_msg : templateid, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
-                                    db.collection('log').insert(insert_data);
+                                    db.collection('status_log').insert(insert_data);
                                 }
                             });
                         });
@@ -332,7 +332,7 @@ app.get('/webhook', (req, res) => {
                                 db.getConnection(function (db) {
                                     console.log("connected db from log page : ")
                                     var insert_data = { fromuid : sender, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
-                                    db.collection('log').insert(insert_data);
+                                    db.collection('status_log').insert(insert_data);
                                 });
                             });
 
@@ -377,7 +377,7 @@ app.get('/webhook', (req, res) => {
                             db.getConnection(function (db) {
                                 console.log("connected db from log page : ")
                                 var insert_data = { fromuid : sender, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
-                                db.collection('log').insert(insert_data);
+                                db.collection('status_log').insert(insert_data);
                             });
                         });
 
