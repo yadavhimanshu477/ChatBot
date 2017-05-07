@@ -174,7 +174,8 @@ app.get('/', (req, res) => {
                 resulte.forEach(function (resulte,iop){
 
                     var oaid = '1032900368143269705';
-                    var phone = resulte.phone;
+                    var fromuid = resulte.fromuid;
+                    //var phone = resulte.phone;
                     var msgid = resulte.msgid;
                     var timestamp = new Date().getTime();
                     var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
@@ -199,7 +200,7 @@ app.get('/', (req, res) => {
                                 console.log(body);
                                 console.log("connected db from log page : ")
                                 if(body.data) {
-                                    var insert_data = { phone : phone, time : timestamp, delivery_status : body.data.status, msgid : msgid }
+                                    var insert_data = { fromuid : fromuid, time : timestamp, delivery_status : body.data.status, msgid : msgid }
                                     db.collection('delivery_status').insert({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
                                 }
                             
