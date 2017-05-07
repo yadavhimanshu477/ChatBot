@@ -258,11 +258,11 @@ app.get('/zalo', (req, res) => {
                             request(options, function (error, response, body) {
                                 if (error) throw new Error(error);
                                 console.log(body);
-                                //db.getConnection(function (db) {
+                                if(body.data) {
                                     console.log("connected db from log page : ")
                                     var insert_data = { phone : phone, broad_msg : templateid, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
                                     db.collection('log').insert(insert_data);
-                                //});
+                                }
                             });
                         });
                     });
