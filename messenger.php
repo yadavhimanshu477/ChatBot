@@ -25,4 +25,12 @@
         $result = hash('sha256', $passcode);
         return $result;
     }
+
+    function my_function_status($oaid, $msgid, $timestamp, $secretkey) {
+        //mac = sha256 (oaid + msgid + timestamp + secretkey)
+        $passcode = (int)$oaid.$msgid.$timestamp.$secretkey;
+        echo $passcode;
+        $result = hash('sha256', $passcode);
+        return $result;
+    }
 ?>

@@ -164,7 +164,49 @@ app.use(bodyParser.json({
 
 app.get('/', (req, res) => {
     res.send("https server started successfully....")
+    // for test purpose
+
+    db.collection('log', function(err, collection) {
+        collection.find().toArray(function(err, resulte) {
+
+            resulte.forEach(function (resulte,iop){
+
+                var oaid = '1032900368143269705';
+                var msgid = resulte.msgid;
+                var timestamp = new Date().getTime();
+                var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
+
+                execPhp('messenger.php', (error, php, outprint) => { 
+                    php.my_function_zalo(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
+                        var options = { method: 'POST',
+                            url: 'https://openapi.zaloapp.com/oa/v1/getmessagestatus',
+                            qs: { 
+                                oaid: oaid,
+                                msgid: msgid,
+                                timestamp: timestamp,
+                                mac: results
+                            },
+                            headers: { 
+                                'cache-control': 'no-cache' 
+                            } 
+                        };
+
+                        request(options, function (error, response, body) {
+                            if (error) throw new Error(error);
+                            console.log(body);
+                            // db.getConnection(function (db) {
+                            //     console.log("connected db from log page : ")
+                            //     var insert_data = { phone : phone, broad_msg : templateid, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
+                            //     db.collection('log').insert(insert_data);
+                            // });
+                        });
+                    });
+                });
+            })
+        })
+    })
 });
+
 
 app.get('/zalo', (req, res) => {
     console.log("inside zalo app")
@@ -207,9 +249,13 @@ app.get('/zalo', (req, res) => {
                             };
 
                             request(options, function (error, response, body) {
-                              if (error) throw new Error(error);
-
-                              console.log(body);
+                                if (error) throw new Error(error);
+                                console.log(body);
+                                db.getConnection(function (db) {
+                                    console.log("connected db from log page : ")
+                                    var insert_data = { phone : phone, broad_msg : templateid, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
+                                    db.collection('log').insert(insert_data);
+                                });
                             });
                         });
                     });
@@ -277,7 +323,7 @@ app.get('/webhook', (req, res) => {
                                 console.log("body.errorMsg is ::: "+body.errorMsg)
                                 db.getConnection(function (db) {
                                     console.log("connected db from log page : ")
-                                    var insert_data = { fromuid : sender, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg }
+                                    var insert_data = { fromuid : sender, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
                                     db.collection('log').insert(insert_data);
                                 });
                             });
