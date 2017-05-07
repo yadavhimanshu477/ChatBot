@@ -179,7 +179,7 @@ app.get('/', (req, res) => {
                     var secretkey = 'IEklE4N1I7bWqp5TOQ2F';
 
                     execPhp('messenger.php', (error, php, outprint) => { 
-                        php.my_function_zalo(oaid, data, timestamp, secretkey, (err, results, output, printed) => {
+                        php.my_function_zalo(oaid, msgid, timestamp, secretkey, (err, results, output, printed) => {
                             var options = { method: 'POST',
                                 url: 'https://openapi.zaloapp.com/oa/v1/getmessagestatus',
                                 qs: { 
