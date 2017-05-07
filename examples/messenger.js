@@ -202,7 +202,7 @@ app.get('/', (req, res) => {
                                 body = JSON.parse(body)
                                 if(body.data) {
                                     var insert_data = { fromuid : fromuid, time : timestamp, delivery_status : body.data.status, msgid : msgid }
-                                    db.collection('delivery_status').insert({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
+                                    db.collection('delivery_status').insert({ fromuid:fromuid, msgid:msgid }, insert_data, { upsert : true });
                                 }
                             
                             });
