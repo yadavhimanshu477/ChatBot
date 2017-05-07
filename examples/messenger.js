@@ -174,7 +174,7 @@ app.get('/', (req, res) => {
                 resulte.forEach(function (resulte,iop){
 
                     var oaid = '1032900368143269705';
-                    var fromuid = resulte.fromuid;
+                    var fromuid = resulte.phone;
                     //var phone = resulte.phone;
                     var msgid = resulte.msgid;
                     var timestamp = new Date().getTime();
