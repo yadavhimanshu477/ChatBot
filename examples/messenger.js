@@ -200,7 +200,7 @@ app.get('/', (req, res) => {
                                 console.log("connected db from log page : ")
                                 if(body.data) {
                                     var insert_data = { phone : phone, time : timestamp, delivery_status : body.data.status, msgid : msgid }
-                                    db.collection('delivery_status').update({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
+                                    db.collection('delivery_status').insert({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
                                 }
                             
                             });
