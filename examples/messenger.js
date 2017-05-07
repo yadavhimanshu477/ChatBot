@@ -199,7 +199,7 @@ app.get('/', (req, res) => {
                                 if (error) throw new Error(error);
                                 console.log(body);
                                 console.log("connected db from log page : ")
-                                body = JSON.parse(data)
+                                body = JSON.parse(body)
                                 if(body.data) {
                                     var insert_data = { fromuid : fromuid, time : timestamp, delivery_status : body.data.status, msgid : msgid }
                                     db.collection('delivery_status').insert({ phone:phone, msgid:msgid }, insert_data, { upsert : true });
