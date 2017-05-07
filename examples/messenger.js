@@ -273,6 +273,12 @@ app.get('/webhook', (req, res) => {
                             request(options, (error, response, body) => {
                                 if (error) throw new Error(error);
                                 console.log(body);
+                                console.log("body.errorMsg is ::: "+body.errorMsg)
+                                db.getConnection(function (db) {
+                                    console.log("connected db from log page : ")
+                                    var insert_data = { fromuid : fromuid, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg }
+                                    db.collection('log').insert(insert_data);
+                                });
                             });
 
                             console.log('Waiting for next user messages');
@@ -311,6 +317,12 @@ app.get('/webhook', (req, res) => {
                         request(options, (error, response, body) => {
                             if (error) throw new Error(error);
                             console.log(body);
+                            console.log("body.errorMsg is ::: "+body.errorMsg)
+                            db.getConnection(function (db) {
+                                console.log("connected db from log page : ")
+                                var insert_data = { fromuid : fromuid, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg }
+                                db.collection('log').insert(insert_data);
+                            });
                         });
 
                         console.log('Waiting for next user messages');
