@@ -329,11 +329,13 @@ app.get('/webhook', (req, res) => {
                                 console.log(body);
                                 body = JSON.parse(body)
                                 console.log("body.errorMsg is ::: "+body.errorMsg)
-                                db.getConnection(function (db) {
-                                    console.log("connected db from log page : ")
-                                    var insert_data = { fromuid : sender, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
-                                    db.collection('status_log').insert(insert_data);
-                                });
+                                if(typeof body.data != 'undefined' && typeof body.data.msgId != 'undefined') {
+                                    db.getConnection(function (db) {
+                                        console.log("connected db from log page : ")
+                                        var insert_data = { fromuid : sender, user_messege : text, bot_reply : msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
+                                        db.collection('status_log').insert(insert_data);
+                                    });
+                                }
                             });
 
                             console.log('Waiting for next user messages');
@@ -374,11 +376,13 @@ app.get('/webhook', (req, res) => {
                             console.log(body);
                             body = JSON.parse(body)
                             console.log("body.errorMsg is ::: "+body.errorMsg)
-                            db.getConnection(function (db) {
-                                console.log("connected db from log page : ")
-                                var insert_data = { fromuid : sender, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
-                                db.collection('status_log').insert(insert_data);
-                            });
+                            if(typeof body.data != 'undefined' && typeof body.data.msgId != 'undefined') {
+                                db.getConnection(function (db) {
+                                    console.log("connected db from log page : ")
+                                    var insert_data = { fromuid : sender, user_messege : text, bot_reply : context.msg, time : timestamp, delivery_status : body.errorMsg, msgid : body.data.msgId }
+                                    db.collection('status_log').insert(insert_data);
+                                });
+                            }
                         });
 
                         console.log('Waiting for next user messages');
