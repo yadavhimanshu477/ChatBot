@@ -18,6 +18,7 @@
         //echo $sender;
         $arr = array('uid'=>(int)$sender,'message'=>$text);
         //echo $arr;
+        $arr = array_map('utf8_encode', $arr);
         $data = json_encode($arr);
         //echo $data;
         $passcode = (int)$oaid.$data.$timestamp.$secretkey;
