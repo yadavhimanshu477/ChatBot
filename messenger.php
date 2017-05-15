@@ -1,6 +1,5 @@
 <?php
     
-    echo "One";
     function my_function_zalo($oaid, $data, $timestamp, $secretkey){
 
         //$datas = json_encode($data);

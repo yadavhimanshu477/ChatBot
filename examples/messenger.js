@@ -360,6 +360,7 @@ app.get('/webhook', (req, res) => {
 
                         console.log("output ::: ")
                         console.log(output)
+                        console.log(printed)
                         console.log(result)
                         console.log("jjjjjjjjjjjjjjjjjjj")
 
