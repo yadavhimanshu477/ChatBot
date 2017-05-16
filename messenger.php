@@ -20,7 +20,7 @@
         //echo $arr;
         $data = json_encode($arr, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         //$data = json_encode($data);
-        //echo $data;
+        echo $data;
         $passcode = (int)$oaid.$data.$timestamp.$secretkey;
         echo $passcode;
         
